@@ -1,13 +1,177 @@
 :root {
   --chat-green: #54bbab;
   --chat-blue: #2699d6;
+  --chat-blue--light: #72c8f7;
   --chat-white: #ffffff;
   --chat-black: #070c21;
   --chat-space: #585fa8;
   --chat-light-black: #0c1326;
   --chat-gray: #f1f9fe;
+  --chat-red: #e74c3c;
+  --chat-text: var(--chat-white);
+  --chat-gradient: linear-gradient(
+    45deg,
+    var(--chat-space) 0%,
+    var(--chat-green) 50%,
+    var(--chat-blue) 100%
+  );
+  --chat-dark-pattern: url('/static/chat/images/dark-pattern.png') repeat;
+  --chat-light-pattern: url('/static/chat/images/light-pattern.png') repeat;
+  --chat-blue-pattern: url('/static/chat/images/blue-pattern.png') repeat;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 body {
+  background: var(--chat-light-pattern);
+  color: var(--chat-black);
   font-family: 'Noto Sans', sans-serif;
+  height: 100vh;
+  width: 100vw;
+}
+
+.back-button {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  height: 3rem;
+  transition: 0.15s;
+  width: 3rem;
+}
+
+.back-button:hover {
+  filter: brightness(1.2);
+}
+
+.back-button img {
+  height: 3rem;
+  width: 3rem;
+}
+
+body:has(.buttons-container) .back-button {
+  display: none;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.buttons-container {
+  align-items: center;
+  background-color: var(--chat-gray);
+  border-radius: 3rem 3rem 0 0;
+  box-shadow: var(--chat-green) 0 0 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  height: 70%;
+  overflow: visible;
+  width: 40%;
+}
+
+.buttons-container__logo {
+  background-color: var(--chat-white);
+  border-radius: 50%;
+  box-shadow: var(--chat-green) 0 0 2px;
+  position: absolute;
+  top: -7.5rem;
+  height: 15rem;
+  width: 15rem;
+}
+
+.buttons-container__logo img {
+  width: 15rem;
+}
+
+.buttons-container__button,
+.login-container__button {
+  background-color: var(--chat-blue);
+  border: none;
+  border-radius: 1rem;
+  color: var(--chat-text);
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  text-decoration: none;
+  transition: 0.1s;
+  height: 6rem;
+  width: 80%;
+}
+
+.buttons-container__button:hover,
+.login-container__button:hover {
+  filter: brightness(1.2);
+}
+
+.login-container {
+  align-items: center;
+  background-color: var(--chat-gray);
+  border-radius: 3rem 3rem 0 0;
+  box-shadow: var(--chat-green) 0 0 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  min-height: 70%;
+  padding: 3rem 0;
+  width: 40%;
+}
+
+.login-container__header {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.login-container__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.login-container__item > * {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.login-container__item > label {
+  font-weight: 500;
+}
+
+.login-container__item > input {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  max-width: 100%;
+}
+
+.login-container__error {
+  color: var(--chat-red);
+  font-weight: 600;
+}
+
+.login-container__button {
+  height: 4rem;
+  width: 50%;
 }

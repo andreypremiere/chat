@@ -8,7 +8,7 @@
     <title>{% block title %}{% endblock title %} Chat</title>
     <link href='https://fonts.googleapis.com/css?family=Noto Sans' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet'>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!--<script src="https://cdn.tailwindcss.com"></script>-->
     <style>
         .messages {
             height: 400px;
@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{% static 'chat/style.css' %}">
 </head>
 
+<<<<<<< HEAD
 <body class="bg-slate-500">
     <nav class="flex items-center justify-between px-4 py-6 bg-slate-800">
         <div>
@@ -49,6 +50,14 @@
 
     {% block content %}
     {% endblock content %}
+=======
+<body>
+    <div class="back-button"><a href="/"><img src="{% static 'chat/images/back.png' %}" alt="Back"></a></div>
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+>>>>>>> daniil
 
     {% block scripts %}
     {% endblock %}

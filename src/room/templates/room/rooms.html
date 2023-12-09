@@ -1,13 +1,13 @@
 {% extends 'chat/base.html' %}
-{% block title %}Rooms | {% endblock %}
+{% block title %}Комнаты | {% endblock %}
 {% block content %}
 <div class="rooms-container">
-    <div class="rooms-container__header">Rooms</div>
+    <div class="rooms-container__header">Комнаты</div>
     <div class="rooms-container__list">
         {% for room in rooms %}
         <div class="rooms-container__item">
             <div class="rooms-container__item-name">{{ room.name }}</div>
-            <a href="{% url 'room' room.slug %}" class="rooms-container__item-button">Join</a>
+            <a href="{% url 'room' room.slug %}" class="rooms-container__item-button">Войти</a>
         </div>
 
         {% endfor %}

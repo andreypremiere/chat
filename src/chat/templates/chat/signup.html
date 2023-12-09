@@ -1,25 +1,25 @@
 {% extends 'chat/base.html' %}
 
-{% block title %} Sign up | {% endblock title %} Welcome |
+{% block title %} Зарегистрироваться | {% endblock title %} Welcome |
 
 {% block content %}
 <div class="login-container">
-    <div class="login-container__header">Sign up</div>
+    <div class="login-container__header">Регистрация</div>
     <form method="post" action="." class="login-container__form">
         {% csrf_token %}
 
         <div class="login-container__item">
-            <label>Username</label>
+            <label>Никнейм</label>
             <input type="text" name="username">
         </div>
 
         <div class="login-container__item">
-            <label class="text-white">Password</label>
+            <label class="text-white">Пароль</label>
             <input type="password" name="password1">
         </div>
 
         <div class="login-container__item">
-            <label class="text-white">Repeat password</label>
+            <label class="text-white">Повторите пароль</label>
             <input type="password" name="password2">
         </div>
 
@@ -33,7 +33,7 @@
         {% endfor %}
         {% endif %}
 
-        <button class="login-container__button">Submit</button>
+        <button class="login-container__button">Подтвердить</button>
     </form>
 </div>
 {% endblock content %}

@@ -8,7 +8,7 @@
         {% for m in messages %}
         <div class="chat-container__message">
             <div class="chat-container__message-avatar">
-                <img src="{% static 'chat/images/avatar.png' %}" alt="Avatar">
+                <img src="{% static 'chat/images/avatar.png' %}" alt="Аватар">
             </div>
             <div class="chat-container__message-content">
                 <b>{{ m.user.username }}</b><br>
@@ -18,9 +18,9 @@
         {% endfor %}
     </div>
     <form method="post" action="." class="chat-container__answer">
-        <input type="text" name="content" placeholder="Your message..." id="chat-message-input">
+        <input type="text" name="content" placeholder="Напишите сообщение..." id="chat-message-input">
 
-        <button id="chat-message-submit">Send</button>
+        <button id="chat-message-submit">Отправить</button>
     </form>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>

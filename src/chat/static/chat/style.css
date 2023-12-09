@@ -1,0 +1,13 @@
+:root {
+  --chat-green: #54bbab;
+  --chat-blue: #2699d6;
+  --chat-white: #ffffff;
+  --chat-black: #070c21;
+  --chat-space: #585fa8;
+  --chat-light-black: #0c1326;
+  --chat-gray: #f1f9fe;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}

@@ -20,6 +20,35 @@
   --chat-blue-pattern: url('/static/chat/images/blue-pattern.png') repeat;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --chat-gray: #112e40;
+  }
+
+  body {
+    background: var(--chat-dark-pattern) !important;
+    color: var(--chat-white) !important;
+  }
+
+  .rooms-container__item {
+    background-color: var(--chat-light-black) !important;
+  }
+
+  .chat-container__messages {
+    background-color: var(--chat-light-black) !important;
+  }
+
+  input {
+    background-color: var(--chat-light-black) !important;
+    border: 1px solid var(--chat-green) !important;
+    color: var(--chat-white) !important;
+  }
+
+  input:focus-visible {
+    border: 1px solid var(--chat-green) !important;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;

@@ -23,12 +23,34 @@
         <button id="chat-message-submit">Send</button>
     </form>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+    function decryptMessage(encryptedMessage) {
+        const decryptedBytes = CryptoJS.AES.decrypt(encryptedMessage, 'your-secret-key');
+        return decryptedBytes.toString(CryptoJS.enc.Utf8);
+    }
+
+    setInterval(function () {
+        const messageContents = document.querySelectorAll('.chat-container__message-content');
+
+        messageContents.forEach(function (element) {
+            const encryptedMessage = element.querySelector('div').innerText;
+            if (!encryptedMessage.startsWith('CR')) {
+                return;
+            }
+            const decryptedMessage = CryptoJS.AES.decrypt(encryptedMessage.slice(2), 'your-secret-key').toString(CryptoJS.enc.Utf8);
+            element.querySelector('div').innerText = decryptedMessage;
+        });
+    }, 1);
+</script>
+
 {% endblock %}
 
 {% block scripts %}
 {{ room.slug|json_script:"json-roomname" }}
 {{ request.user.username|json_script:"json-username" }}
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
     function getHash(input) {
         let hash = 0;
@@ -78,27 +100,31 @@
     document.querySelector('#chat-message-input').focus();
 
     document.querySelector('#chat-message-submit').onclick = function (e) {
-        e.preventDefault()
+        e.preventDefault();
 
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
 
+        // Шифрование текста сообщения
+        const encryptedMessage = 'CR' + CryptoJS.AES.encrypt(message, 'your-secret-key').toString();
+
         console.log({
-            'message': message,
+            'message': encryptedMessage,
             'username': userName,
             'room': roomName
-        })
+        });
 
         chatSocket.send(JSON.stringify({
-            'message': message,
+            'message': encryptedMessage,
             'username': userName,
             'room': roomName
         }));
 
         messageInputDom.value = '';
 
-        return false
+        return false;
     };
+
 
     /**
     * A function for finding the messages element, and scroll to the bottom of it.

@@ -27,8 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/rooms/'
+LOGIN_URL = '/login/'
 
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'daphne',
     'django.contrib.staticfiles',
+    'channels',
+    'chat',
+    'room',
 ]
 
 MIDDLEWARE = [
@@ -67,20 +73,34 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'hackathon.wsgi.application'
 
+WSGI_APPLICATION = 'hackathon.wsgi.application'
+ASGI_APPLICATION = 'hackathon.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer'
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'chat',
+#         'USER': 'user',
+#         'PASSWORD': '12345678',
+#         'HOST': 'localhost',  # Или IP-адрес вашего MySQL сервера
+#         'PORT': '3306',  # Порт MySQL сервера
+#     }
+# }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'chat',
-        'USER': 'user',
-        'PASSWORD': '12345678',
-        'HOST': 'localhost',  # Или IP-адрес вашего MySQL сервера
-        'PORT': '3306',  # Порт MySQL сервера
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

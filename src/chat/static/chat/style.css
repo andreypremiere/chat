@@ -382,3 +382,27 @@ body:has(.buttons-container) .back-button {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.token-container {
+  align-items: center;
+  background-color: var(--chat-gray);
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: var(--chat-green) 0 0 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  left: 85%;
+  min-height: 20%;
+  padding: 1rem;
+  width: 13%;
+}
+
+.token-container > input {
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  height: 3rem;
+  max-width: 100%;
+}

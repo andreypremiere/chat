@@ -2,6 +2,9 @@
 {% load static %}
 {% block title %}{{ room.name }} | {% endblock %}
 {% block content %}
+<div class="token-container">
+    <input type="text" name="token" placeholder="Введите токен..." id="chat-token">
+</div>
 <div class="chat-container">
     <div class="chat-container__header">{{ room.name }}</div>
     <div class="chat-container__messages" id="chat-messages">
@@ -13,6 +16,7 @@
             <div class="chat-container__message-content">
                 <b>{{ m.user.username }}</b><br>
                 <div>{{ m.content }}</div>
+                <div style="display: none">{{ m.content }}</div>
             </div>
         </div>
         {% endfor %}
@@ -32,14 +36,14 @@
 
     setInterval(function () {
         const messageContents = document.querySelectorAll('.chat-container__message-content');
+        const key = document.querySelector('#chat-token').value;
 
         messageContents.forEach(function (element) {
-            const encryptedMessage = element.querySelector('div').innerText;
-            if (!encryptedMessage.startsWith('CR')) {
-                return;
-            }
-            const decryptedMessage = CryptoJS.AES.decrypt(encryptedMessage.slice(2), 'your-secret-key').toString(CryptoJS.enc.Utf8);
-            element.querySelector('div').innerText = decryptedMessage;
+            const encryptedMessage = element.querySelectorAll('div')[1].innerText;
+            try {
+                const decryptedMessage = CryptoJS.AES.decrypt(encryptedMessage, key).toString(CryptoJS.enc.Utf8);
+                element.querySelectorAll('div')[0].innerText = decryptedMessage;
+            } catch (e) { }
         });
     }, 1);
 </script>
@@ -88,7 +92,7 @@
 
         if (data.message) {
             document.querySelector('#chat-messages').innerHTML += (
-                "<div class=\"chat-container__message\"><div class=\"chat-container__message-avatar\"><img src=\"/static/chat/images/avatar.png\" alt=\"Avatar\"></div><div class=\"chat-container__message-content\"><b>" + data.username + "</b><br><div>" + data.message + "</div></div></div>");
+                "<div class=\"chat-container__message\"><div class=\"chat-container__message-avatar\"><img src=\"/static/chat/images/avatar.png\" alt=\"Avatar\"></div><div class=\"chat-container__message-content\"><b>" + data.username + "</b><br><div>" + data.message + "</div><div style=\"display: none;\">" + data.message + "</div></div></div>");
             colorNickname(document.querySelector('#chat-messages').lastElementChild);
         } else {
             alert('The message was empty!')
@@ -105,8 +109,9 @@
         const messageInputDom = document.querySelector('#chat-message-input');
         const message = messageInputDom.value;
 
+        const key = document.querySelector('#chat-token').value;
         // Шифрование текста сообщения
-        const encryptedMessage = 'CR' + CryptoJS.AES.encrypt(message, 'your-secret-key').toString();
+        const encryptedMessage = CryptoJS.AES.encrypt(message, key).toString();
 
         console.log({
             'message': encryptedMessage,
